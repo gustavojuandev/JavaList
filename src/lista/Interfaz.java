@@ -13,6 +13,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +42,7 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -49,9 +52,12 @@ public class Interfaz extends javax.swing.JFrame {
         importe = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTablaMultiplicar = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        Total = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        Guardar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,6 +109,71 @@ public class Interfaz extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblTablaMultiplicar);
 
+        jLabel4.setText("Total");
+
+        Total.setEditable(false);
+        Total.setForeground(new java.awt.Color(153, 153, 153));
+        Total.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TotalActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(673, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel1)
+                    .addGap(18, 18, 18)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(26, 26, 26)
+                    .addComponent(jLabel2)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel3)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(importe, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(27, 27, 27)
+                    .addComponent(addBtn)
+                    .addContainerGap(123, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(484, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(146, 146, 146))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(addBtn)
+                        .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(importe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(181, Short.MAX_VALUE)))
+        );
+
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jMenu1.setText("Arxiu");
@@ -115,6 +186,14 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Guardar);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -124,40 +203,14 @@ public class Interfaz extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(importe, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(addBtn)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(addBtn)
-                    .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(importe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -217,6 +270,59 @@ public class Interfaz extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+        
+        /*Leer el model*/
+        
+        
+   
+        
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");   
+        int userSelection = fileChooser.showSaveDialog(jPanel1);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            System.out.println("Save as file: " + fileToSave.getAbsolutePath());           
+            
+            
+             FileWriter writer;
+            try {
+                writer = new FileWriter(fileToSave,true);
+                   
+                  
+                     
+                         for(int row = 0;row < tableModel.getRowCount();row++) {
+
+                              
+                                 
+                                 String line = tableModel.getValueAt(row, 0) +"|"+   tableModel.getValueAt(row, 1) + "|" +   tableModel.getValueAt(row, 2) + "\n";
+                                writer.write(line);
+                        }
+
+                         
+                           
+                writer.close();
+
+                JOptionPane.showMessageDialog(this, "El dato se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                
+            } catch (IOException ex) {
+                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+
+               
+        }
+        
+        
+        
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void TotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TotalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +361,8 @@ public class Interfaz extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Guardar;
+    private javax.swing.JTextField Total;
     private javax.swing.JButton addBtn;
     private javax.swing.JTextField descripcion;
     private javax.swing.JFormattedTextField importe;
@@ -262,80 +370,48 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTablaMultiplicar;
     // End of variables declaration//GEN-END:variables
 
-    private void btnCalcActionPerformed(ActionEvent evt) {    
-        
-        
-         try{       
-            String desc = descripcion.getText();
-            int imp = Integer.parseInt(importe.getText());
-       
-            String opcio  = jComboBox1.getSelectedItem().toString();   
-            
-            
-            if(desc.equals("")){
-                 JOptionPane.showMessageDialog(this, "Vacío", "Mensaje", JOptionPane.ERROR_MESSAGE);
-                 
-         
-            }else {
-                File file = new File("database.txt");
-                FileWriter writer = new FileWriter(file,true);
-                String line = opcio +"|"+ desc + "|" + imp + "\n";
-
-                writer.write(line);
-                writer.close();
-
-                JOptionPane.showMessageDialog(this, "El dato se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-             }
-            
-            
-         
-              
-               
-
-      
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "ERROR: " + e, "Error", JOptionPane.ERROR_MESSAGE);
-        }
-         
-         
-    }
+   
     
  
-    public void genereateTable()
-    {
-    String[] cabeceras = new String[3];      
-    DefaultTableModel tableModel = new DefaultTableModel(new Object[10][3], cabeceras);
-    tblTablaMultiplicar.setModel(tableModel);
-    
-      for(int i = 0; i < 10; i++){
-            for(int j=0; j < 3; j++){
-                tblTablaMultiplicar.setValueAt("asda", i, j);
-            }
-        }        
-    }
     
     
     public static final String[] columns = {
         "Tipus", "Descripció", "Import"
     };
+    
+    public int total;
+    
     public DefaultTableModel tableModel = new DefaultTableModel( columns,0);
 
     private void btnAddLineActionPerformed(ActionEvent evt) {
         
-         String desc = descripcion.getText();
+        String desc = descripcion.getText();
         int imp = Integer.parseInt(importe.getText());       
         String opcio  = jComboBox1.getSelectedItem().toString();   
         
+        if(opcio.equals("Venda")){
+            imp = -imp;
+        }
+        
         
           tableModel.addRow(new Object[]{opcio, desc, imp});
+          
+          total = total + imp;
+          
+          Total.setText(String.valueOf(total));
+          
     }
+    
+    
 
 
 }
