@@ -28,6 +28,7 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
+        tblTablaMultiplicar.setModel(tableModel);
     }
 
     /**
@@ -43,7 +44,7 @@ public class Interfaz extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
         descripcion = new javax.swing.JTextField();
         importe = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -67,10 +68,10 @@ public class Interfaz extends javax.swing.JFrame {
 
         jLabel3.setText("Import");
 
-        jButton1.setText("Afegir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setText("Afegir");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
 
@@ -83,6 +84,23 @@ public class Interfaz extends javax.swing.JFrame {
         importe.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         importe.setToolTipText("Especifica le importe en decimales");
 
+        tblTablaMultiplicar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane1.setViewportView(tblTablaMultiplicar);
 
         jMenuBar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -122,7 +140,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(importe, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(jButton1)))
+                        .addComponent(addBtn)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,7 +152,7 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jButton1)
+                    .addComponent(addBtn)
                     .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(importe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -149,9 +167,11 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        btnCalcActionPerformed(evt);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        //btnCalcActionPerformed(evt);
+        System.out.println("Pulsado");
+        btnAddLineActionPerformed(evt);
+    }//GEN-LAST:event_addBtnActionPerformed
 
     private void descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionActionPerformed
         // TODO add your handling code here:
@@ -235,9 +255,9 @@ public class Interfaz extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBtn;
     private javax.swing.JTextField descripcion;
     private javax.swing.JFormattedTextField importe;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -301,5 +321,21 @@ public class Interfaz extends javax.swing.JFrame {
         }        
     }
     
+    
+    public static final String[] columns = {
+        "Tipus", "Descripció", "Import"
+    };
+    public DefaultTableModel tableModel = new DefaultTableModel( columns,0);
+
+    private void btnAddLineActionPerformed(ActionEvent evt) {
+        
+         String desc = descripcion.getText();
+        int imp = Integer.parseInt(importe.getText());       
+        String opcio  = jComboBox1.getSelectedItem().toString();   
+        
+        
+          tableModel.addRow(new Object[]{opcio, desc, imp});
+    }
+
 
 }
