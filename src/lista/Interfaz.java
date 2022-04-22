@@ -15,13 +15,14 @@ import java.io.IOException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Gustavo Juan
+ * @author Gustavo Juan 44753664B
  */
 public class Interfaz extends javax.swing.JFrame {
 
@@ -221,8 +222,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        //btnCalcActionPerformed(evt);
-        System.out.println("Pulsado");
+
         btnAddLineActionPerformed(evt);
     }//GEN-LAST:event_addBtnActionPerformed
 
@@ -232,91 +232,95 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-          JFileChooser fc = new JFileChooser();
-           int selection = fc.showOpenDialog(this);        
-            if(selection == JFileChooser.APPROVE_OPTION)        {
+        JFileChooser fc = new JFileChooser();
+        int selection = fc.showOpenDialog(this);
+        if (selection == JFileChooser.APPROVE_OPTION) {
             File fichero = fc.getSelectedFile();
-           
-            try{
-                 BufferedReader in = new BufferedReader(new FileReader(fichero.getAbsolutePath()));                 
-                String firstLine = in.readLine().trim();
-                             
-                 Vector vector=new Vector();
-                 vector.addElement("1");
-                 vector.addElement("2");
-                 vector.addElement("3");
-                 DefaultTableModel model = (DefaultTableModel)tblTablaMultiplicar.getModel();
-                 model.setColumnIdentifiers(vector);
-                 
+
+            try {
+                BufferedReader in = new BufferedReader(new FileReader(fichero.getAbsolutePath()));
+
+                Vector vector = new Vector();
+
+                vector.addElement("Tipus");
+                vector.addElement("Descripció");
+                vector.addElement("Import");
+                DefaultTableModel model = (DefaultTableModel) tblTablaMultiplicar.getModel();
+
+                model.setColumnIdentifiers(vector);
+                total = 0;
+
+                String line1 = null;
+                while ((line1 = in.readLine()) != null) {
+
+                }
+
                 Object[] tableLines = in.lines().toArray();
-                
-                     for(int i = 0; i < tableLines.length; i++)
-            {
-                String line = tableLines[i].toString().trim();
-                String[] dataRow = line.split("-");
-                model.addRow(dataRow);
-            }
-               
-                 in.close();
-                 
-                 //Cogemos el tamaño de la fuente del fichero y le pasamos el valor al JSlider
-            
-               
-                 
-            }catch(IOException e){
-                JOptionPane.showMessageDialog(this, "Error al leer el fichero: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);               
+
+                BufferedReader reader = new BufferedReader(new FileReader(fichero.getAbsolutePath()));
+                while ((line1 = reader.readLine()) != null) {
+                    System.out.println(line1);
+                    String[] dataRow = line1.split("\\|");
+                    int size = dataRow.length;
+
+                    if (size != 3) {
+                        JOptionPane.showMessageDialog(this, "Numero de campos incorrecto en la linea ", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        model.addRow(dataRow);
+                        int imp = Integer.parseInt(dataRow[2]);
+                        total = total + imp;
+                        Total.setText(String.valueOf(total));
+                    }
+                }
+
+                in.close();
+
+                //Cogemos el tamaño de la fuente del fichero y le pasamos el valor al JSlider
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error al leer el fichero: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-        
+
         /*Leer el model*/
-        
-        
-   
-        
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Specify a file to save");   
+        fileChooser.setDialogTitle("Specify a file to save");
         int userSelection = fileChooser.showSaveDialog(jPanel1);
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
-            System.out.println("Save as file: " + fileToSave.getAbsolutePath());           
-            
-            
-             FileWriter writer;
+            System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+
+            FileWriter writer;
             try {
-                writer = new FileWriter(fileToSave,true);
-                   
-                  
-                     
-                         for(int row = 0;row < tableModel.getRowCount();row++) {
+                writer = new FileWriter(fileToSave, true);
 
-                              
-                                 
-                                 String line = tableModel.getValueAt(row, 0) +"|"+   tableModel.getValueAt(row, 1) + "|" +   tableModel.getValueAt(row, 2) + "\n";
-                                writer.write(line);
-                        }
+                for (int row = 0; row < tableModel.getRowCount(); row++) {
 
-                         
-                           
+                    String line = tableModel.getValueAt(row, 0) + "|" + tableModel.getValueAt(row, 1) + "|" + tableModel.getValueAt(row, 2) + "\n" + "-----" + "\n";
+                    writer.write(line);
+                }
+
                 writer.close();
-
                 JOptionPane.showMessageDialog(this, "El dato se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                
+
+                int rowCount = tableModel.getRowCount();
+                //Remove rows one by one from the end of the table
+                for (int i = rowCount - 1; i >= 0; i--) {
+                    tableModel.removeRow(i);
+                }
+
             } catch (IOException ex) {
                 Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
 
-               
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void TotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TotalActionPerformed
@@ -357,7 +361,6 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
     }
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -379,39 +382,37 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTable tblTablaMultiplicar;
     // End of variables declaration//GEN-END:variables
 
-   
-    
- 
-    
-    
     public static final String[] columns = {
         "Tipus", "Descripció", "Import"
     };
-    
+
     public int total;
-    
-    public DefaultTableModel tableModel = new DefaultTableModel( columns,0);
+
+    public DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
 
     private void btnAddLineActionPerformed(ActionEvent evt) {
-        
-        String desc = descripcion.getText();
-        int imp = Integer.parseInt(importe.getText());       
-        String opcio  = jComboBox1.getSelectedItem().toString();   
-        
-        if(opcio.equals("Venda")){
-            imp = -imp;
-        }
-        
-        
-          tableModel.addRow(new Object[]{opcio, desc, imp});
-          
-          total = total + imp;
-          
-          Total.setText(String.valueOf(total));
-          
-    }
-    
-    
 
+        String desc = descripcion.getText();
+        String opcio = jComboBox1.getSelectedItem().toString();
+
+        try {
+            int imp = Integer.parseInt(importe.getText());
+
+            if (opcio.equals("Venda")) {
+                imp = -imp;
+            }
+
+            tableModel.addRow(new Object[]{opcio, desc, imp});
+            total = total + imp;
+            Total.setText(String.valueOf(total));
+
+            descripcion.setText("");
+            importe.setText("");
+
+        } catch (NumberFormatException ex) { // handle your exception
+            JOptionPane.showMessageDialog(this, "Formato incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
 
 }
